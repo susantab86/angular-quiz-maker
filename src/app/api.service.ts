@@ -18,7 +18,8 @@ export class ApiService {
 
   fetchTrackTeam() {
     this.dates = '';
-    for (let i = 0; i < 12; i++) {
+    let i: number = 0;
+    while (i < 12) {
       let date = new Date();
       date.setDate(date.getDate() - 1);
       let thatDay = date.getDate() - i;
@@ -28,13 +29,13 @@ export class ApiService {
       let year = date.getFullYear();
       let DD;
       let MM;
+      i++;
       if (month < 10) {
         MM = '0' + month;
       }
       day < 10 ? (DD = '0' + day) : (DD = day);
       this.dates = this.dates + '&dates[]=' + year + '-' + MM + '-' + DD;
     }
-    console.log(this.dates);
     return this.dates;
   }
   teamList(): Observable<any> {
