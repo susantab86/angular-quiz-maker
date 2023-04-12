@@ -13,7 +13,7 @@ export class ApiService {
   private URL = environment.endpointApi;
   private teamUrlEndpoint: string = NBATracker_API_Const.pages;
   private teamResultUrlEndpoint: string = NBATracker_API_Const.noOfTeams;
-  public dates: string ='';
+  public dates: string = '';
   constructor(private http: HttpClient) {}
 
   fetchTrackTeam() {
@@ -21,7 +21,7 @@ export class ApiService {
     for (let i = 0; i < 12; i++) {
       let date = new Date();
       date.setDate(date.getDate() - 1);
-      let thatDay = date.getDate() - i; 
+      let thatDay = date.getDate() - i;
       date.setDate(thatDay);
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -31,11 +31,7 @@ export class ApiService {
       if (month < 10) {
         MM = '0' + month;
       }
-      if (day < 10) {
-        DD = '0' + day;
-      } else {
-        DD = day;
-      }
+      day < 10 ? (DD = '0' + day) : (DD = day);
       this.dates = this.dates + '&dates[]=' + year + '-' + MM + '-' + DD;
     }
     console.log(this.dates);
