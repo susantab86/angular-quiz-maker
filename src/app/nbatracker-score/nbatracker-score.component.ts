@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { ImgDetails_Const } from '../Shared/nbatrackerConstants';
-import { teamdetails, TeamList, TeamListDeatils } from '../Shared/nbatracker.modal';
+import {
+  teamdetails,
+  TeamList,
+  TeamListDeatils,
+} from '../Shared/nbatracker.modal';
 
 @Component({
   selector: 'app-nba-score',
@@ -24,14 +28,14 @@ export class NbaScoreComponent implements OnInit {
   }
 
   getNbaTrackerTeamData() {
-    const pastTwlveDaysdates = this.service.getParams();
+    const pastTwlveDaysdates = this.service.fetchTrackTeam();
     const teamId = this.nbatracker_teamSelection.id;
     const unrepeatableTeam: boolean = this.uniqueTeam(
       this.nbatracker_selectedAllTeam,
       teamId
     );
     if (!unrepeatableTeam) {
-       this.service.getTeam(teamId, pastTwlveDaysdates).subscribe((res) => {
+      this.service.fetchNBATrackerSquad(teamId, pastTwlveDaysdates).subscribe((res) => {
         const fetchData = this.fetchScore(res.data, teamId);
         const teamData: any = this.nbatracker_teamSelection;
         teamData.results = fetchData.results;
@@ -80,7 +84,7 @@ export class NbaScoreComponent implements OnInit {
   }
 
   private initData() {
-    this.service.getTeamList().subscribe((res) => {
+    this.service.teamList().subscribe((res) => {
       this.nbatracker_listofteams = res.data;
     });
   }

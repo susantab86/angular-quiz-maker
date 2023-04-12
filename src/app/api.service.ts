@@ -16,7 +16,7 @@ export class ApiService {
   public dates: string ='';
   constructor(private http: HttpClient) {}
 
-  getParams() {
+  fetchTrackTeam() {
     this.dates = '';
     for (let i = 0; i < 12; i++) {
       let date = new Date();
@@ -41,11 +41,11 @@ export class ApiService {
     console.log(this.dates);
     return this.dates;
   }
-  getTeamList(): Observable<any> {
+  teamList(): Observable<any> {
     let url = this.URL + this.teamResultUrlEndpoint;
     return this.http.get<any>(url);
   }
-  getTeam(id: number, params: string): Observable<any> {
+  fetchNBATrackerSquad(id: number, params: string): Observable<any> {
     let url = this.URL + this.teamUrlEndpoint + params;
     let queryParams = new HttpParams();
     queryParams = queryParams.append('team_ids[]', id);
@@ -53,7 +53,7 @@ export class ApiService {
       params: queryParams,
     });
   }
-  getTeamResult(id: string): Observable<any> {
+  fetchFinalOutcome(id: string): Observable<any> {
     let url = this.URL + this.teamResultUrlEndpoint + '/' + id;
     return this.http.get<any>(url);
   }

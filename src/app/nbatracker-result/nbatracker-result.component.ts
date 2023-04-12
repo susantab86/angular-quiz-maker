@@ -21,16 +21,16 @@ export class NbaTeamResultComponent implements OnInit {
     });
   }
   fetchResult(nbatracker_threeLetterCode: number) {
-    const dateParams = this.apiService.getParams();
+    const dateParams = this.apiService.fetchTrackTeam();
     this.apiService
-      .getTeam(nbatracker_threeLetterCode, dateParams)
+      .fetchNBATrackerSquad(nbatracker_threeLetterCode, dateParams)
       .subscribe((res) => {
         this.nbatracker_dashBrdResult = res.data;
       });
   }
   fetchSquadData(nbatracker_threeLetterCode: number) {
     this.apiService
-      .getTeamResult(nbatracker_threeLetterCode.toString())
+      .fetchFinalOutcome(nbatracker_threeLetterCode.toString())
       .subscribe((res) => {
         this.nbatracker_squadDesc = res;
       });
