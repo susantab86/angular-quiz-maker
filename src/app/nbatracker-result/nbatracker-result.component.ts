@@ -18,7 +18,7 @@ export class NbaTeamResultComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.nbatracker_threeLetterCode = +params['teamCode']; // (+) converts string 'id' to a number
+      this.nbatracker_threeLetterCode = +params['teamCode']; 
       this.fetchResult(params['teamCode']);
       this.fetchSquadData(params['teamCode']);
     });
