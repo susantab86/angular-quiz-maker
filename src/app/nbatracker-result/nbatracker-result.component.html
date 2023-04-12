@@ -22,7 +22,10 @@
             <div class="left-text">
               <span class="ml-2 text-900 text-sm">Scroes of past 12 days:</span>
               <div class="body-box">
-                <div class="details mt-3" *ngFor="let score of nbatracker_dashBrdResult">
+                <div
+                  class="details mt-3"
+                  *ngFor="let score of nbatracker_dashBrdResult"
+                >
                   <span>
                     <b> {{ score.home_team.abbreviation }} </b>
                     {{ score.home_team_score }}
@@ -37,11 +40,10 @@
             </div>
           </div>
           <ng-template pTemplate="footer">
-            <app-backBtn
-              label="&#x3c;"
-              id="backBtn"
-              class="mr-3"
-            ></app-backBtn>
+            <p-button
+              (click)="back()"
+              label="<< Back to all team stats"
+            ></p-button>
           </ng-template>
         </p-card>
       </div>
