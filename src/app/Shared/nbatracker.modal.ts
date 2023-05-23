@@ -8,6 +8,10 @@ export interface TeamList {
   name: string;
 
 }
+export interface City {
+  name: string;
+  code: string;
+}
 export interface TeamListDeatils{
     id: number
     abbreviation: string;

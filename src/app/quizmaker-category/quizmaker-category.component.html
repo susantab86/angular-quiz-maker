@@ -1,4 +1,16 @@
-<div><h4>Quiz Maker</h4></div>
+<div class="conatiner main-box p-4">
+  <h3>Quiz Maker</h3>
+  <div class="mr-4 flex">
+    <p-dropdown id="categorySelect" [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a category" [editable]="true" optionLabel="name"></p-dropdown>
+
+    <p-dropdown id="difficultySelect" [options]="cities" [(ngModel)]="selectedCity" placeholder="Select difficulty" [editable]="true" optionLabel="name"></p-dropdown>
+
+    
+    <p-button id="createBtn" label="Create"></p-button>
+  </div>
+
+  
+</div>
 <!--
 <div class="conatiner main-box p-4">
 <h3>NBA Score Tracking App</h3>

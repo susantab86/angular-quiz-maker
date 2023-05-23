@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { City } from '../Shared/nbatracker.modal';
 
 @Component({
   selector: 'app-quizmaker-category',
@@ -8,8 +9,19 @@ import { ApiService } from '../api.service';
   styleUrls: ['./quizmaker-category.component.scss'],
 })
 export class QuizMakerCategoryComponent implements OnInit {
+  public cities: City[] =[];
+
+  public selectedCity: City[]=[];
   constructor(private service: ApiService, private router: Router) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cities = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' },
+    ];
+  }
 }
 
 /*export class QuizMakerCategoryComponent implements OnInit {
