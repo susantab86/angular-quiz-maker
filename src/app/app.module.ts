@@ -5,32 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './api.interceptor';
+import { HttpClientModule } from '@angular/common/http';
+//import { AuthInterceptor } from './api.interceptor';
 import { ApiService } from './api.service';
-import {SkeletonModule} from 'primeng/skeleton';
-
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
-  declarations: [
-    AppComponent    
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,    
-    FormsModule,    
+    BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
-    SkeletonModule
+    SkeletonModule,
   ],
-  providers: [
-    ApiService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

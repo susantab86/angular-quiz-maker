@@ -5,14 +5,14 @@ import { DropdownModule } from 'primeng/dropdown';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { NbaScoreComponent } from './nbatracker-score.component';
-import { NbaTeamResultComponent } from '../nbatracker-result/nbatracker-result.component';
 import { AccordionModule } from 'primeng/accordion';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SkeletonModule } from 'primeng/skeleton';
 import { RouterModule } from '@angular/router';
-import { NbatrackerScoreRoutingModule } from './nbatracker-score-routing.module';
+import { QuizmakerCategoryRoutingModule } from './quizmaker-category-routing.module';
+import { QuizMakerCategoryComponent } from './quizmaker-category.component';
+import { QuizMakerResultComponent } from '../quizmaker-result/quizmaker-result.component';
 
 @NgModule({
   imports: [
@@ -25,8 +25,8 @@ import { NbatrackerScoreRoutingModule } from './nbatracker-score-routing.module'
     RouterModule,
     HttpClientModule,
     SkeletonModule,
-    NbatrackerScoreRoutingModule,
+    QuizmakerCategoryRoutingModule,
   ],
-  declarations: [NbaScoreComponent, NbaTeamResultComponent],
+  declarations: [QuizMakerCategoryComponent, QuizMakerResultComponent],
 })
-export class NbatrackerScoreAppModule {}
+export class QuizmakerCategoryAppModule {} 

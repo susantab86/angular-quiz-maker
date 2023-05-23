@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { ImgDetails_Const } from '../Shared/nbatrackerConstants';
-import {
-  teamdetails,
-  TeamList,
-  TeamListDeatils,
-} from '../Shared/nbatracker.modal';
 
 @Component({
-  selector: 'app-nba-score',
-  templateUrl: './nbatracker-score.component.html',
-  styleUrls: ['./nbatracker-score.component.scss'],
+  selector: 'app-quizmaker-category',
+  templateUrl: './quizmaker-category.component.html',
+  styleUrls: ['./quizmaker-category.component.scss'],
 })
-export class NbaScoreComponent implements OnInit {
+export class QuizMakerCategoryComponent implements OnInit {
+  constructor(private service: ApiService, private router: Router) {}
+  ngOnInit(): void {}
+}
+
+/*export class QuizMakerCategoryComponent implements OnInit {
   public nbatracker_listofteams: TeamList[] = [];
   public nbatracker_teamSelection!: TeamList;
   public nbatracker_selectedAllTeam: Array<TeamListDeatils> = [];
@@ -95,4 +94,4 @@ export class NbaScoreComponent implements OnInit {
   displayTracker_result(teamCode: any) {
     this.router.navigate(['/results', teamCode.id]);
   }
-}
+}*/

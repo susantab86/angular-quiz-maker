@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { TeamList, teamResults } from '../Shared/nbatracker.modal';
 
 @Component({
-  selector: 'app-nba-team-result',
-  templateUrl: './nbatracker-result.component.html',
-  styleUrls: ['./nbatracker-result.component.scss'],
+  selector: 'app-quiz-result',
+  templateUrl: './quizmaker-result.component.html',
+  styleUrls: ['./quizmaker-result.component.scss'],
 })
-export class NbaTeamResultComponent implements OnInit {
+export class QuizMakerResultComponent implements OnInit {
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  ngOnInit(): void {}
+}
+/*export class QuizMakerResultComponent implements OnInit {
   public nbatracker_threeLetterCode!: number;
   public nbatracker_dashBrdResult: Array<teamResults> = [];
   public nbatracker_squadDesc: TeamList | undefined;
@@ -38,4 +41,4 @@ export class NbaTeamResultComponent implements OnInit {
   back() {
     window.history.back();
   }
-}
+}*/
