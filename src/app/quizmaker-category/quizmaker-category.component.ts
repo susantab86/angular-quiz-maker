@@ -55,21 +55,22 @@ export class QuizMakerCategoryComponent implements OnInit {
   clickButton(event, parentIndex, childIndex) {
     console.log(event, parentIndex);
     this.quesresults[parentIndex].selectedAnsw = event;
+    this.render.removeClass(
+      document.getElementById('bt_' + parentIndex + '_' + childIndex),
+      'p-button-outlined'
+    );
+    this.render.addClass(
+      document.getElementById('bt_' + parentIndex + '_' + childIndex),
+      'p-button-success'
+    );
     console.log('quesresults', this.quesresults);
     this.checkEnable();
-    //this.isActive = true;
-    // for (let i = 1; i < 5; i++) {
-    // }
-
-    //console.log(event.target.id);
-    //var bid = document.getElementById('Bt1').style.backgroundColor ='green'
   }
   checkEnable() {
     this.enableSubmit = false;
     this.quesresults.forEach((ele) => {
       if (ele.selectedAnsw !== '') {
         this.enableSubmit = true;
-        
       } else {
         this.enableSubmit = false;
       }
