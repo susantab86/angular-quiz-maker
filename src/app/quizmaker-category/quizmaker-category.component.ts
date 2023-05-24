@@ -76,6 +76,10 @@ export class QuizMakerCategoryComponent implements OnInit {
       }
     });
   }
+  submitButton() {
+    this.router.navigate(['/results']);
+    this.service.sendCompData(this.quesresults);
+  }
   createQuestion() {
     console.log('click');
     this.quesresults = [];

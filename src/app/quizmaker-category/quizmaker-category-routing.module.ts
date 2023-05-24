@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: QuizMakerCategoryComponent,
   },
-  { path: 'results/:id1/:id2', component: QuizMakerResultComponent },
+  { path: 'results', component: QuizMakerResultComponent },
 ];
 
 @NgModule({

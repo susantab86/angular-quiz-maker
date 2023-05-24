@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { question } from '../Shared/quizmaker.modal';
 
 @Component({
   selector: 'app-quiz-result',
@@ -9,9 +10,17 @@ import { ApiService } from '../api.service';
 })
 export class QuizMakerResultComponent implements OnInit {
   public category: number = 0;
+  public result: Array<question> = [];
   public difficultyMode: string = '';
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
   ngOnInit(): void {
+    /*this.apiService.sharedDaraSubject.subscribe((d) => {
+      console.log('heloo -- > ' + d);
+      console.log(d);
+    });*/
+    this.result = this.apiService.getCompData();
+    console.log('hi' + this.result);
+    console.log(this.result);
     this.route.params.subscribe((params) => {
       this.category = params['id1'];
       this.difficultyMode = params['id2'];

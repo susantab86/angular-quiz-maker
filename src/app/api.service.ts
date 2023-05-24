@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable ,Subject} from 'rxjs';
 import { environment } from '../environments/environment.prod';
+import { question } from './Shared/quizmaker.modal';
 //import { NBATracker_API_Const } from './Shared/nbatrackerConstants';
 
 @Injectable({
@@ -10,7 +11,8 @@ import { environment } from '../environments/environment.prod';
 export class ApiService {
   private URL = environment.endpointApi;
   private quesURL = environment.getquestionApi;
-
+  //public sharedDaraSubject = new Subject<question>();
+  public temp: Array<question> = [];
   constructor(private http: HttpClient) {}
 
   getCategory() {
@@ -27,5 +29,15 @@ export class ApiService {
       '&type=multiple';
     console.log(mainURL);
     return this.http.get(mainURL);
+  }
+  sendCompData(data){
+    console.log("ser-->")
+    console.log(data)
+    this.temp = data;
+    //this.sharedDaraSubject.next(data)
+  }
+  getCompData(){
+    return this.temp;
+    //this.sharedDaraSubject.next(data)
   }
 }
