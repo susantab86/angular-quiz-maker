@@ -67,3 +67,12 @@ export interface home_team {
   full_name: string;
   name: string;
 }
+export interface question {
+  category:string;
+  correct_answer:string;
+  difficulty:string;
+  incorrect_answers:Array<string>;
+  question:string;
+  type:string;
+  selectedAnsw:string;
+}

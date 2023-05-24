@@ -4,7 +4,7 @@ import { ApiService } from '../api.service';
 
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { category, difficulty } from '../Shared/quizmaker.modal';
+import { category, difficulty, question } from '../Shared/quizmaker.modal';
 
 @Component({
   selector: 'app-quizmaker-category',
@@ -13,7 +13,7 @@ import { category, difficulty } from '../Shared/quizmaker.modal';
 })
 export class QuizMakerCategoryComponent implements OnInit {
   public val: Array<string> = [];
-  public quesresults = [];
+  public quesresults: Array<question> = [];
   public btnOptions = [];
   public difficulties: difficulty[] = [];
   public category: category[] = [];
@@ -23,6 +23,7 @@ export class QuizMakerCategoryComponent implements OnInit {
   public difficultyName: string = '';
   private subscriptions: Subscription[] = [];
   public isActive: boolean = false;
+  public enableSubmit: boolean;
   constructor(
     private service: ApiService,
     private router: Router,
@@ -51,17 +52,29 @@ export class QuizMakerCategoryComponent implements OnInit {
     console.log(val);
     this.difficultyName = val;
   }
-  clickButton(event) {
+  clickButton(event, parentIndex, childIndex) {
+    console.log(event, parentIndex);
+    this.quesresults[parentIndex].selectedAnsw = event;
+    console.log('quesresults', this.quesresults);
+    this.checkEnable();
     //this.isActive = true;
-    for (let i = 1; i < 5; i++) {
-      this.render.removeClass(document.getElementById('Bt' + i), 'active');
-    }
+    // for (let i = 1; i < 5; i++) {
+    // }
 
-    this.render.addClass(event.target, 'active');
     //console.log(event.target.id);
     //var bid = document.getElementById('Bt1').style.backgroundColor ='green'
   }
-
+  checkEnable() {
+    this.enableSubmit = false;
+    this.quesresults.forEach((ele) => {
+      if (ele.selectedAnsw !== '') {
+        this.enableSubmit = true;
+        
+      } else {
+        this.enableSubmit = false;
+      }
+    });
+  }
   createQuestion() {
     console.log('click');
     this.quesresults = [];
@@ -69,19 +82,24 @@ export class QuizMakerCategoryComponent implements OnInit {
     this.service
       .getQuestions(this.categoryId, this.difficultyName)
       .subscribe((res) => {
-        //console.log(res['question']);
-        Object.values(res).forEach((val) => {
-          let arr = val;
-          for (var key in arr) {
-            console.log(key);
-            this.quesresults.push(arr[key].question);
-            this.btnOptions.push(arr[key].correct_answer);
-            for (let i = 0; i < arr[key].incorrect_answers.length; i++) {
-              this.btnOptions.push(arr[key].incorrect_answers[i]);
-            }
-          }
+        this.quesresults = res['results'];
+        this.quesresults.forEach((ele, indx, val) => {
+          this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
+          this.quesresults[indx].selectedAnsw = '';
         });
-        console.log(this.btnOptions);
+
+        //console.log(res['question']);
+        // Object.values(res).forEach((val) => {
+        //   let arr = val;
+        //   for (var key in arr) {
+        //     console.log(key);
+        //     this.quesresults.push(arr[key].question);
+        //     this.btnOptions.push(arr[key].correct_answer);
+        //     for (let i = 0; i < arr[key].incorrect_answers.length; i++) {
+        //       this.btnOptions.push(arr[key].incorrect_answers[i]);
+        //     }
+        //   }
+        // });
         //this.quesresults = res;
       });
     //this.router.navigate(['/results', this.categoryId, this.difficultyName]);
