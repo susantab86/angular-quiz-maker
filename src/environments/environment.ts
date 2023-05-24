@@ -2,7 +2,7 @@
 
 export const environment = {
   production: false,
-  endpointApi: "https://free-nba.p.rapidapi.com"
+  endpointApi: "https://opentdb.com/api_category.php"
 
 };
 

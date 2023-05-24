@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { City } from '../Shared/nbatracker.modal';
+import { category, difficulty } from '../Shared/nbatracker.modal';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quizmaker-category',
@@ -9,17 +11,26 @@ import { City } from '../Shared/nbatracker.modal';
   styleUrls: ['./quizmaker-category.component.scss'],
 })
 export class QuizMakerCategoryComponent implements OnInit {
-  public cities: City[] =[];
-
-  public selectedCity: City[]=[];
+  public val: Array<string> = [];
+  public difficulties: difficulty[] = [];
+  public category: category[] = [];
+  public selectedCategory: category[] = [];
+  public selecteddiffculty: difficulty[] = [];
+  private subscriptions: Subscription[] = [];
   constructor(private service: ApiService, private router: Router) {}
   ngOnInit(): void {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
+    this.subscriptions.push(
+      this.service.getCategory().subscribe((res) => {
+        Object.values(res).forEach((val) => {
+          this.category = val;
+        });
+      })
+    );
+
+    this.difficulties = [
+      { name: 'Easy', code: 'E' },
+      { name: 'medium', code: 'M' },
+      { name: 'hard', code: 'H' },
     ];
   }
 }
