@@ -8,6 +8,7 @@
       placeholder="Select a category"
       [editable]="true"
       optionLabel="name"
+      (onChange)="selectcategoryid($event.value.id)"
     ></p-dropdown>
 
     <p-dropdown
@@ -19,7 +20,7 @@
       optionLabel="name"
     ></p-dropdown>
 
-    <p-button id="createBtn" label="Create"></p-button>
+    <p-button label="Create" (click)="createQuestion()"> </p-button>
   </div>
 </div>
 <!--

@@ -33,6 +33,12 @@ export class QuizMakerCategoryComponent implements OnInit {
       { name: 'hard', code: 'H' },
     ];
   }
+  selectcategoryid(val: number) {
+    console.log(val);
+  }
+  createQuestion() {
+    console.log('click');
+  }
 }
 
 /*export class QuizMakerCategoryComponent implements OnInit {
