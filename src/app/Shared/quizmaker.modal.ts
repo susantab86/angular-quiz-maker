@@ -11,6 +11,14 @@ export interface difficulty {
   name: string;
   code: string;
 }
+export interface questions {
+  category: string;
+  type: string;
+  difficulty: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: Array<string>;
+}
 export interface category {
   id: number;
   name: string;

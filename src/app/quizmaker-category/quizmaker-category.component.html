@@ -25,46 +25,43 @@
   </div>
 </div>
 <div class="conatiner main-box p-4">
-  <!--<div *ngFor="let ques of quesresults; let i = index"><p>{{ques.question}}</p></div>-->
-  <div>
-    <p>
-      This movie contains the quote, &quot;What we&#039;ve got here is a failure
-      to communicate.&quot;
-    </p>
+  <div *ngFor="let ques of quesresults; let i = index">
+    <p>{{ ques }}</p>
 
-    <button
-      pButton
-      pRipple
-      class="p-button-outlined"
-      id="Bt1"
-      (click)="clickButton($event)"
-    >
-      Bonnie and Clyde
-    </button>
+    <div *ngFor="let btns of btnOptions; let j = index">
+      <button
+        pButton
+        pRipple
+        class="p-button-outlined"
+        id="Bt1"
+        (click)="clickButton($event)"
+      >
+        {{btns}}
+      </button>
+    </div>
+    <!--<button
+        pButton
+        pRipple
+        class="p-button-outlined ml-2"
+        id="Bt2"
+        [ngClass]=""
+        (click)="clickButton($event)"
+      >
+        xyz
+      </button>
 
-    <button
-      pButton
-      pRipple
-      class="p-button-outlined ml-2"
-      id="Bt2"
-      [ngClass]=""
-      (click)="clickButton($event)"
-    >
-      The Graduate
-    </button>
+      <button
+        pButton
+        pRipple
+        class="p-button-outlined ml-2"
+        id="Bt3"
+        [ngClass]=""
+        (click)="isActive = !isActive; clickButton($event)"
+      >
+        xyz
+      </button>
 
-    <button
-      pButton
-      pRipple
-      class="p-button-outlined ml-2"
-      id="Bt3"
-      [ngClass]=""
-      (click)="isActive = !isActive; clickButton($event)"
-    >
-      The Graduate
-    </button>
-
-    <button
+      <button
       pButton
       pRipple
       class="p-button-outlined ml-2"
@@ -73,10 +70,20 @@
       (click)="clickButton($event)"
     >
       The Graduate
-    </button>
+    </button>-->
   </div>
-</div>
-<!--
+
+  <!--<button
+      pButton
+      pRipple
+      class="p-button-outlined ml-2"
+      id="Bt4"
+      [ngClass]=""
+      (click)="clickButton($event)"
+    >
+      The Graduate
+    </button>-->
+  <!--
 <div class="conatiner main-box p-4">
 <h3>NBA Score Tracking App</h3>
 
@@ -172,4 +179,4 @@
 </div>
 </div>
 
--->
+--></div>
