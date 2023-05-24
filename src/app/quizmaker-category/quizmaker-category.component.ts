@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { category, difficulty } from '../Shared/nbatracker.modal';
+
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { category, difficulty } from '../Shared/quizmaker.modal';
 
 @Component({
   selector: 'app-quizmaker-category',
@@ -12,12 +13,20 @@ import { Subscription } from 'rxjs';
 })
 export class QuizMakerCategoryComponent implements OnInit {
   public val: Array<string> = [];
+  public quesresults = [];
   public difficulties: difficulty[] = [];
   public category: category[] = [];
   public selectedCategory: category[] = [];
   public selecteddiffculty: difficulty[] = [];
+  public categoryId: number = 0;
+  public difficultyName: string = '';
   private subscriptions: Subscription[] = [];
-  constructor(private service: ApiService, private router: Router) {}
+  public isActive: boolean = false;
+  constructor(
+    private service: ApiService,
+    private router: Router,
+    private render: Renderer2
+  ) {}
   ngOnInit(): void {
     this.subscriptions.push(
       this.service.getCategory().subscribe((res) => {
@@ -33,11 +42,40 @@ export class QuizMakerCategoryComponent implements OnInit {
       { name: 'hard', code: 'H' },
     ];
   }
-  selectcategoryid(val: number) {
+  selectCategoryId(val: number) {
     console.log(val);
+    this.categoryId = val;
   }
+  selecteDifficultyId(val: string) {
+    console.log(val);
+    this.difficultyName = val;
+  }
+  clickButton(event) {
+    //this.isActive = true;
+    for(let i=1;i<5;i++){
+     this.render.removeClass(document.getElementById('Bt'+i), 'active');
+    }
+    
+    this.render.addClass(event.target, 'active');
+    //console.log(event.target.id);
+    //var bid = document.getElementById('Bt1').style.backgroundColor ='green'
+  }
+
   createQuestion() {
     console.log('click');
+    this.service
+      .getQuestions(this.categoryId, this.difficultyName)
+      .subscribe((res) => {
+        //console.log(res['question']);
+        Object.values(res).forEach((val) => {
+          let arr = val;
+
+          console.log(arr.question);
+        });
+
+        //this.quesresults = res;
+      });
+    //this.router.navigate(['/results', this.categoryId, this.difficultyName]);
   }
 }
 

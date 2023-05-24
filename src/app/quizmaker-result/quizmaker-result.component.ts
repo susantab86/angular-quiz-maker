@@ -8,8 +8,16 @@ import { ApiService } from '../api.service';
   styleUrls: ['./quizmaker-result.component.scss'],
 })
 export class QuizMakerResultComponent implements OnInit {
+  public category: number = 0;
+  public difficultyMode: string = '';
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.category = params['id1'];
+      this.difficultyMode = params['id2'];
+      console.log(this.category + ' ----> ' + this.difficultyMode);
+    });
+  }
 }
 /*export class QuizMakerResultComponent implements OnInit {
   public nbatracker_threeLetterCode!: number;
