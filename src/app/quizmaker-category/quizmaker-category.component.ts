@@ -56,6 +56,17 @@ export class QuizMakerCategoryComponent implements OnInit {
   clickButton(event, parentIndex, childIndex) {
     console.log(event, parentIndex);
     this.quesresults[parentIndex].selectedAnsw = event;
+
+    for (let i = parentIndex; i < 4; i++) {
+      this.render.removeClass(
+        document.getElementById('bt_' + parentIndex + '_' + i),
+        'p-button-success'
+      );
+      this.render.addClass(
+        document.getElementById('bt_' + parentIndex + '_' + i),
+        'p-button-outlined'
+      );
+    }
     this.render.removeClass(
       document.getElementById('bt_' + parentIndex + '_' + childIndex),
       'p-button-outlined'
@@ -64,6 +75,7 @@ export class QuizMakerCategoryComponent implements OnInit {
       document.getElementById('bt_' + parentIndex + '_' + childIndex),
       'p-button-success'
     );
+
     console.log('quesresults', this.quesresults);
     this.checkEnable();
   }
