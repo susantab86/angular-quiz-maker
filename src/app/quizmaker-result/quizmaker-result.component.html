@@ -36,9 +36,9 @@
   text-align: center;
   margin-left: 20%;"
     [ngClass]="{
-      'red': this.counter > 0 && this.counter < 1,
-      'yelow': this.counter > 2 && this.counter < 3,
-      'green': this.counter > 4 && this.counter < 5
+      red: this.counter == 0 || this.counter == 1,
+      yelow: this.counter == 2 || this.counter == 3,
+      green: this.counter == 4 || this.counter == 5
     }"
   >
     You Scored {{ this.counter }} Out of 5
