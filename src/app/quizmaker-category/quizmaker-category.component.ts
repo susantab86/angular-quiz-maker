@@ -24,6 +24,7 @@ export class QuizMakerCategoryComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   public isActive: boolean = false;
   public enableSubmit: boolean;
+  public enableCounter: number = 0;
   constructor(
     private service: ApiService,
     private router: Router,
@@ -66,6 +67,7 @@ export class QuizMakerCategoryComponent implements OnInit {
     console.log('quesresults', this.quesresults);
     this.checkEnable();
   }
+
   checkEnable() {
     this.enableSubmit = false;
     this.quesresults.forEach((ele) => {

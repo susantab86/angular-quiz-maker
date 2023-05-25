@@ -12,6 +12,7 @@ export class QuizMakerResultComponent implements OnInit {
   public category: number = 0;
   public result: Array<question> = [];
   public difficultyMode: string = '';
+  public checkAns:boolean =false;
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
   ngOnInit(): void {
     /*this.apiService.sharedDaraSubject.subscribe((d) => {
@@ -21,11 +22,16 @@ export class QuizMakerResultComponent implements OnInit {
     this.result = this.apiService.getCompData();
     console.log('hi' + this.result);
     console.log(this.result);
-    this.route.params.subscribe((params) => {
+    this.result.forEach((ele, indx, val) => {
+      if(this.result[indx].selectedAnsw == this.result[indx].correct_answer){
+        this.checkAns =true;
+      } 
+    });
+    /*this.route.params.subscribe((params) => {
       this.category = params['id1'];
       this.difficultyMode = params['id2'];
       console.log(this.category + ' ----> ' + this.difficultyMode);
-    });
+    });*/
   }
 }
 /*export class QuizMakerResultComponent implements OnInit {

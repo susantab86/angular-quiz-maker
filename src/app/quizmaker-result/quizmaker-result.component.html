@@ -16,11 +16,38 @@
       <button
         pButton
         pRipple
-        class="p-button-outlined"
+        [ngClass]="this.checkAns ? 'green' : 'red'"
         id="bt_{{ i + '_' + j }}"
       >
         {{ btns }}
       </button>
     </div>
   </div>
+  <div
+    style="background-color: red;
+  width: 50%;
+  margin-top: 82px;
+  text-align: center;
+  margin-left: 20%;"
+  >
+    You Scored 1 Out of 5
+  </div>
+  <div
+    style="
+  margin-top: 82px;
+    margin-left:14%;"
+  >
+    <button
+      style="width: 74%;
+    height: 40px;"
+      pButton
+      pRipple
+      class="p-button-outlined"
+      id="Btn_quiz"
+    >
+      <p style="margin-left:40%">Create a new quiz</p>
+    </button>
+  </div>
 </div>
+
+<!--[ngClass]="this.checkAns ? p-button-success : p-button-danger"-->
