@@ -57,15 +57,17 @@ export class QuizMakerCategoryComponent implements OnInit {
     console.log(event, parentIndex);
     this.quesresults[parentIndex].selectedAnsw = event;
 
-    for (let i = parentIndex; i < 4; i++) {
-      this.render.removeClass(
-        document.getElementById('bt_' + parentIndex + '_' + i),
-        'p-button-success'
-      );
-      this.render.addClass(
-        document.getElementById('bt_' + parentIndex + '_' + i),
-        'p-button-outlined'
-      );
+    for (let i = parentIndex; i < 5; i++) {
+      for (let j = 0; j < 4; j++) {
+        this.render.removeClass(
+          document.getElementById('bt_' + parentIndex + '_' + j),
+          'p-button-success'
+        );
+        this.render.addClass(
+          document.getElementById('bt_' + parentIndex + '_' + j),
+          'p-button-outlined'
+        );
+      }
     }
     this.render.removeClass(
       document.getElementById('bt_' + parentIndex + '_' + childIndex),
