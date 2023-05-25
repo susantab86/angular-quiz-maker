@@ -12,7 +12,9 @@ export class QuizMakerResultComponent implements OnInit {
   public category: number = 0;
   public result: Array<question> = [];
   public difficultyMode: string = '';
-  public checkAns:boolean =false;
+  public checkAns: boolean = false;
+  public counter: number = 0;
+
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
   ngOnInit(): void {
     /*this.apiService.sharedDaraSubject.subscribe((d) => {
@@ -23,9 +25,11 @@ export class QuizMakerResultComponent implements OnInit {
     console.log('hi' + this.result);
     console.log(this.result);
     this.result.forEach((ele, indx, val) => {
-      if(this.result[indx].selectedAnsw == this.result[indx].correct_answer){
-        this.checkAns =true;
-      } 
+      if (this.result[indx].selectedAnsw == this.result[indx].correct_answer) {
+        this.counter++;
+        console.log("counter "+ this.counter)
+        this.checkAns = true;
+      }
     });
     /*this.route.params.subscribe((params) => {
       this.category = params['id1'];
