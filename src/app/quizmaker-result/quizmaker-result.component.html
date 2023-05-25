@@ -16,7 +16,13 @@
       <button
         pButton
         pRipple
-        [ngClass]="this.checkAns ? 'green' : 'red'"
+        class="p-button-outlined p-button-success"
+        [ngClass]="[
+          ques.correct_answer == btns ? 'green' : '',
+          ques.selectedAnsw == btns && ques.correct_answer !== ques.selectedAnsw
+            ? 'red'
+            : ''
+        ]"
         id="bt_{{ i + '_' + j }}"
       >
         {{ btns }}
