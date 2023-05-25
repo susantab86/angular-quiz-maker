@@ -21,7 +21,12 @@
           ques.correct_answer == btns &&
           ques.selectedAnsw == ques.correct_answer
             ? 'green'
-            : ''
+            : ques.correct_answer != ques.selectedAnsw &&
+              ques.selectedAnsw == btns
+            ? 'red'
+            : ques.correct_answer == btns
+            ? 'green'
+            : 'p-button-outlined'
         ]"
         id="bt_{{ i + '_' + j }}"
       >

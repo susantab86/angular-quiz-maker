@@ -101,8 +101,8 @@ export class QuizMakerCategoryComponent implements OnInit {
     this.service.sendCompData(this.quesresults);
   }
   createQuestion() {
-    console.log('click' + this.difficultyName);
-    if (this.selectedCategory && this.selecteddiffculty) {
+    console.log('click' + this.categoryId);
+    if (this.categoryId != 0 && this.difficultyName != '') {
       this.quesresults = [];
       this.btnOptions = [];
       this.service
