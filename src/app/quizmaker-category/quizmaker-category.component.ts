@@ -81,10 +81,14 @@ export class QuizMakerCategoryComponent implements OnInit {
   }
 
   checkEnable() {
+    this.enableCounter = 0;
     this.enableSubmit = false;
     this.quesresults.forEach((ele) => {
       if (ele.selectedAnsw !== '') {
-        this.enableSubmit = true;
+        this.enableCounter++;
+        if (this.enableCounter == 5) {
+          this.enableSubmit = true;
+        }
       } else {
         this.enableSubmit = false;
       }
@@ -95,17 +99,19 @@ export class QuizMakerCategoryComponent implements OnInit {
     this.service.sendCompData(this.quesresults);
   }
   createQuestion() {
-    console.log('click');
-    this.quesresults = [];
-    this.btnOptions = [];
-    this.service
-      .getQuestions(this.categoryId, this.difficultyName)
-      .subscribe((res) => {
-        this.quesresults = res['results'];
-        this.quesresults.forEach((ele, indx, val) => {
-          this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
-          this.quesresults[indx].selectedAnsw = '';
+    console.log('click' + this.difficultyName);
+    if (this.selectedCategory && this.selecteddiffculty) {
+      this.quesresults = [];
+      this.btnOptions = [];
+      this.service
+        .getQuestions(this.categoryId, this.difficultyName)
+        .subscribe((res) => {
+          this.quesresults = res['results'];
+          this.quesresults.forEach((ele, indx, val) => {
+            this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
+            this.quesresults[indx].selectedAnsw = '';
+          });
         });
-      });
+    }
   }
 }

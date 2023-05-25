@@ -16,11 +16,11 @@
       <button
         pButton
         pRipple
-        class="p-button-outlined p-button-success"
+        class="noHover"
         [ngClass]="[
-          ques.correct_answer == btns ? 'green' : '',
-          ques.selectedAnsw == btns && ques.correct_answer !== ques.selectedAnsw
-            ? 'red'
+          ques.correct_answer == btns &&
+          ques.selectedAnsw == ques.correct_answer
+            ? 'green'
             : ''
         ]"
         id="bt_{{ i + '_' + j }}"
@@ -45,7 +45,7 @@
   </div>
   <div
     style="
-  margin-top: 82px;
+  margin-top: 20px;
     margin-left:14%;"
   >
     <button

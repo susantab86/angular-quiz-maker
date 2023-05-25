@@ -16,7 +16,10 @@
 .blank {
   border-top: 1px solid;
 }
-
+.noHover{
+  pointer-events: none;
+  cursor: default;
+}
 .red{
   background-color: red;
 }
