@@ -100,6 +100,13 @@ export class QuizMakerCategoryComponent implements OnInit {
     this.router.navigate(['/results']);
     this.service.sendCompData(this.quesresults);
   }
+  randomArray(array) {
+    for (let k = array.length - 1; k > 0; k--) {
+      const l = Math.floor(Math.random() * (k + 1));
+      [array[k], array[l]] = [array[l], array[k]];
+    }
+    return array;
+  }
   createQuestion() {
     console.log('click' + this.categoryId);
     if (this.categoryId != 0 && this.difficultyName != '') {
@@ -111,6 +118,10 @@ export class QuizMakerCategoryComponent implements OnInit {
           this.quesresults = res['results'];
           this.quesresults.forEach((ele, indx, val) => {
             this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
+            this.quesresults[indx].incorrect_answers = this.randomArray(
+              this.quesresults[indx].incorrect_answers
+            );
+
             this.quesresults[indx].selectedAnsw = '';
           });
         });
