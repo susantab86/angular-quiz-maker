@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { question } from '../Shared/quizmaker.modal';
 
@@ -15,7 +15,11 @@ export class QuizMakerResultComponent implements OnInit {
   public checkAns: boolean = false;
   public counter: number = 0;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
     this.result = this.apiService.getCompData();
     console.log('hi' + this.result);
@@ -27,5 +31,8 @@ export class QuizMakerResultComponent implements OnInit {
         this.checkAns = true;
       }
     });
+  }
+  createNewQuiz() {
+    this.router.navigate(['/']);
   }
 }
