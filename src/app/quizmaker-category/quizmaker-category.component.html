@@ -1,6 +1,6 @@
 <div class="conatiner p-4">
-  <h3 style="text-align:center">Quiz Maker</h3>
-  <div style="width:600px;" class="mr-4 flex">
+  <h3 class="txt_align">Quiz Maker</h3>
+  <div class="mr-4 flex wd-area">
     <p-dropdown
       id="categorySelect"
       [options]="category"
@@ -25,16 +25,11 @@
     </p-button>
   </div>
 
-  <div
-    style="width: 100%;
-    margin-top: 8%;"
-    *ngFor="let ques of quesresults; let i = index"
-  >
+  <div class="ques_txt" *ngFor="let ques of quesresults; let i = index">
     <p>{{ ques.question }}</p>
 
     <div
-      style="float:left; margin-left:20px;ß "
-      class="fitcontent ml-4"
+      class="fitcontent ml-4 ques_sub_txt"
       *ngFor="let btns of ques.incorrect_answers; let j = index"
     >
       <button
