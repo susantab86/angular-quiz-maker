@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../environments/environment.prod';
 import { question, quizCategory, quizQuestion } from './Shared/quizmaker.modal';
-//import { NBATracker_API_Const } from './Shared/nbatrackerConstants';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +32,4 @@ export class ApiService {
       '&type=multiple';
     return this.http.get<quizQuestion>(mainURL);
   }
- 
 }
