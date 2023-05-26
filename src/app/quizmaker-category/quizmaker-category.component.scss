@@ -13,26 +13,23 @@
 .txt_align {
   text-align: center;
 }
-.ques_txt{
+.ques_txt {
   width: 100%;
-    margin-top: 8%;
+  margin-top: 8%;
 }
-.ques_sub_txt{
-  float:left; margin-left:20px;
+.ques_sub_txt {
+  float: left;
+  margin-left: 20px;
 }
 .sub_btn {
-  width: 1000px;
-  margin-left: 21px;
-  float: left;
-  margin-top: 20px;
+  text-align: center;
 }
 
 .lstSub_btn {
-  width: 64%;
-  margin-left: 23%;
+  margin: 10px;
+  width: 60%;
   background-color: gray;
   color: white;
-  height: 40px;
 }
 .lstSub_btn:hover {
   background-color: gray;
