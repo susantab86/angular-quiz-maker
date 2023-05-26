@@ -2,20 +2,13 @@ export interface difficulty {
   name: string;
   code: string;
 }
-export interface questions {
-  category: string;
-  type: string;
-  difficulty: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: Array<string>;
-}
+
 export interface category {
   id: number;
   name: string;
 }
 export interface quizCategory {
-  data: Array<category>;
+  trivia_categories: Array<category>;
 }
 
 export interface question {
@@ -25,5 +18,9 @@ export interface question {
   incorrect_answers: Array<string>;
   question: string;
   type: string;
-  selectedAnsw: string;
+  selectedAnsw?: string;
+}
+export interface quizQuestion {
+  response_code: number;
+  results: Array<question>;
 }

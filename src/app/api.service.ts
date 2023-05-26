@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable ,Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../environments/environment.prod';
-import { question } from './Shared/quizmaker.modal';
+import { question, quizCategory, quizQuestion } from './Shared/quizmaker.modal';
 //import { NBATracker_API_Const } from './Shared/nbatrackerConstants';
 
 @Injectable({
@@ -11,14 +11,18 @@ import { question } from './Shared/quizmaker.modal';
 export class ApiService {
   private URL = environment.endpointApi;
   private quesURL = environment.getquestionApi;
-  //public sharedDaraSubject = new Subject<question>();
   public temp: Array<question> = [];
   constructor(private http: HttpClient) {}
-
-  getCategory() {
-    return this.http.get(this.URL);
+  sendCompData(data) {
+    this.temp = data;
   }
-  getQuestions(category: number, diff: string) {
+  getCompData() {
+    return this.temp;
+  }
+  getCategory(): Observable<quizCategory> {
+    return this.http.get<quizCategory>(this.URL);
+  }
+  getQuestions(category: number, diff: string): Observable<quizQuestion> {
     const mainURL =
       this.quesURL +
       'amount=5&' +
@@ -27,17 +31,7 @@ export class ApiService {
       '&difficulty=' +
       diff +
       '&type=multiple';
-    console.log(mainURL);
-    return this.http.get(mainURL);
+    return this.http.get<quizQuestion>(mainURL);
   }
-  sendCompData(data){
-    console.log("ser-->")
-    console.log(data)
-    this.temp = data;
-    //this.sharedDaraSubject.next(data)
-  }
-  getCompData(){
-    return this.temp;
-    //this.sharedDaraSubject.next(data)
-  }
+ 
 }

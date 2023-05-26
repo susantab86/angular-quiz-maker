@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -11,10 +11,8 @@ import { category, difficulty, question } from '../Shared/quizmaker.modal';
   templateUrl: './quizmaker-category.component.html',
   styleUrls: ['./quizmaker-category.component.scss'],
 })
-export class QuizMakerCategoryComponent implements OnInit {
-  public val: Array<string> = [];
+export class QuizMakerCategoryComponent implements OnInit, OnDestroy {
   public quesresults: Array<question> = [];
-  public btnOptions = [];
   public difficulties: difficulty[] = [];
   public category: category[] = [];
   public selectedCategory: category[] = [];
@@ -22,7 +20,7 @@ export class QuizMakerCategoryComponent implements OnInit {
   public categoryId: number = 0;
   public difficultyName: string = '';
   private subscriptions: Subscription[] = [];
-  public isActive: boolean = false;
+  public isActive: boolean;
   public enableSubmit: boolean;
   public enableCounter: number = 0;
   constructor(
@@ -31,32 +29,53 @@ export class QuizMakerCategoryComponent implements OnInit {
     private render: Renderer2
   ) {}
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.service.getCategory().subscribe((res) => {
-        Object.values(res).forEach((val) => {
-          this.category = val;
-        });
-      })
-    );
-
+    this.getCategory();
     this.difficulties = [
       { name: 'Easy', code: 'E' },
       { name: 'medium', code: 'M' },
       { name: 'hard', code: 'H' },
     ];
   }
+  getCategory() {
+    this.subscriptions.push(
+      this.service.getCategory().subscribe((res) => {
+        this.category = res['trivia_categories'];
+      })
+    );
+  }
+  createQuestion() {
+    if (this.categoryId != 0 && this.difficultyName != '') {
+      this.subscriptions.push(
+        this.service
+          .getQuestions(this.categoryId, this.difficultyName)
+          .subscribe((res) => {
+            this.quesresults = res['results'];
+            this.quesresults.forEach((ele, indx, val) => {
+              this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
+              this.quesresults[indx].incorrect_answers = this.randomArray(
+                this.quesresults[indx].incorrect_answers
+              );
+              this.quesresults[indx].selectedAnsw = '';
+            });
+          })
+      );
+    }
+  }
+  randomArray(array) {
+    for (let k = array.length - 1; k > 0; k--) {
+      const l = Math.floor(Math.random() * (k + 1));
+      [array[k], array[l]] = [array[l], array[k]];
+    }
+    return array;
+  }
   selectCategoryId(val: number) {
-    console.log(val);
     this.categoryId = val;
   }
   selecteDifficultyId(val: string) {
-    console.log(val);
     this.difficultyName = val;
   }
   clickButton(event, parentIndex, childIndex) {
-    console.log(event, parentIndex);
     this.quesresults[parentIndex].selectedAnsw = event;
-
     for (let i = parentIndex; i < 5; i++) {
       for (let j = 0; j < 4; j++) {
         this.render.removeClass(
@@ -77,8 +96,6 @@ export class QuizMakerCategoryComponent implements OnInit {
       document.getElementById('bt_' + parentIndex + '_' + childIndex),
       'p-button-success'
     );
-
-    console.log('quesresults', this.quesresults);
     this.checkEnable();
   }
 
@@ -100,31 +117,8 @@ export class QuizMakerCategoryComponent implements OnInit {
     this.router.navigate(['/results']);
     this.service.sendCompData(this.quesresults);
   }
-  randomArray(array) {
-    for (let k = array.length - 1; k > 0; k--) {
-      const l = Math.floor(Math.random() * (k + 1));
-      [array[k], array[l]] = [array[l], array[k]];
-    }
-    return array;
-  }
-  createQuestion() {
-    console.log('click' + this.categoryId);
-    if (this.categoryId != 0 && this.difficultyName != '') {
-      this.quesresults = [];
-      this.btnOptions = [];
-      this.service
-        .getQuestions(this.categoryId, this.difficultyName)
-        .subscribe((res) => {
-          this.quesresults = res['results'];
-          this.quesresults.forEach((ele, indx, val) => {
-            this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
-            this.quesresults[indx].incorrect_answers = this.randomArray(
-              this.quesresults[indx].incorrect_answers
-            );
 
-            this.quesresults[indx].selectedAnsw = '';
-          });
-        });
-    }
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
