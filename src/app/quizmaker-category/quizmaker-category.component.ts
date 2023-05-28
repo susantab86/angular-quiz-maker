@@ -23,6 +23,7 @@ export class QuizMakerCategoryComponent implements OnInit, OnDestroy {
   public isActive: boolean;
   public enableSubmit: boolean;
   public enableCounter: number = 0;
+  public disabled: boolean;
   constructor(
     private service: ApiService,
     private router: Router,
@@ -45,19 +46,28 @@ export class QuizMakerCategoryComponent implements OnInit, OnDestroy {
   }
   createQuestion() {
     if (this.categoryId != 0 && this.difficultyName != '') {
+      this.disabled = true;
       this.subscriptions.push(
         this.service
-          .getQuestions(this.categoryId, this.difficultyName)
-          .subscribe((res) => {
-            this.quesresults = res['results'];
-            this.quesresults.forEach((ele, indx, val) => {
-              this.quesresults[indx].incorrect_answers.push(ele.correct_answer);
-              this.quesresults[indx].incorrect_answers = this.randomArray(
-                this.quesresults[indx].incorrect_answers
-              );
-              this.quesresults[indx].selectedAnsw = '';
-            });
-          })
+          .getQuestions(this.categoryId, this.difficultyName.toLowerCase())
+          .subscribe(
+            (res) => {
+              this.quesresults = res['results'];
+              this.quesresults.forEach((ele, indx, val) => {
+                this.quesresults[indx].incorrect_answers.push(
+                  ele.correct_answer
+                );
+                this.quesresults[indx].incorrect_answers = this.randomArray(
+                  this.quesresults[indx].incorrect_answers
+                );
+                this.quesresults[indx].selectedAnsw = '';
+              });
+              this.disabled = false;
+            },
+            (error) => {
+              this.disabled = false;
+            }
+          )
       );
     }
   }

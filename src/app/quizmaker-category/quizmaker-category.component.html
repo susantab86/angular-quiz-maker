@@ -24,14 +24,19 @@
         (onChange)="selecteDifficultyId($event.value.name)"
       ></p-dropdown>
 
-      <p-button id="createBtn" label="Create" (click)="createQuestion()">
+      <p-button
+        id="createBtn"
+        label="Create"
+        [disabled]="disabled"
+        (click)="createQuestion()"
+      >
       </p-button>
     </div>
   </div>
   <div>
     <div class="grid" *ngFor="let ques of quesresults; let i = index">
       <div class="col-12">
-        <p>{{ ques.question }}</p>
+        <p [innerHTML]="ques.question"></p>
       </div>
       <div
         class="fitcontent ml-4 col"
@@ -44,7 +49,7 @@
           id="bt_{{ i + '_' + j }}"
           (click)="clickButton(btns, i, j)"
         >
-          {{ btns }}
+          <p [innerHTML]="btns"></p>
         </button>
       </div>
     </div>
